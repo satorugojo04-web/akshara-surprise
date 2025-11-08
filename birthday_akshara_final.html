@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Happy Birthday Akshara 🎉</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #ffd6eb;
+    --lilac: #e6ddff;
+    --accent: #8b008b;
+    --input: #e8faef;
+  }
+
+  body {
+    margin:0; padding:0;
+    background:linear-gradient(135deg,var(--pink),var(--lilac));
+    font-family:"Poppins",sans-serif;
+    overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+    height:100vh;
+    color:#3b1a45;
+  }
+
+  .card {
+    position:relative;
+    width:90%; max-width:900px;
+    background:rgba(255,255,255,0.85);
+    border-radius:24px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 18px 50px rgba(120,60,140,0.15);
+    overflow:hidden;
+  }
+
+  h1 {
+    font-family:'Great Vibes',cursive;
+    font-size:72px;
+    color:var(--accent);
+    margin:0 0 8px;
+  }
+
+  h2 {
+    font-family:'Great Vibes',cursive;
+    font-size:48px;
+    color:var(--accent);
+    margin:0;
+  }
+
+  .subtitle {
+    color:#6e3a76;
+    font-size:16px;
+    margin-bottom:20px;
+  }
+
+  .balloon {
+    position:absolute;
+    width:60px; height:80px; border-radius:50%;
+    opacity:0.9;
+    animation:float 10s ease-in-out infinite;
+  }
+  .b1{background:#ffb6c1;left:10%;bottom:-20%;animation-delay:0s;}
+  .b2{background:#e0b0ff;left:35%;bottom:-25%;animation-delay:2s;}
+  .b3{background:#98fb98;left:60%;bottom:-15%;animation-delay:4s;}
+  .b4{background:#add8e6;left:80%;bottom:-22%;animation-delay:6s;}
+  @keyframes float {
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-60vh);}
+    100%{transform:translateY(0);}
+  }
+
+  .slide {display:none;opacity:0;transition:opacity .5s ease;}
+  .slide.active {display:block;opacity:1;}
+
+  .question {font-size:22px;margin-bottom:14px;}
+  input {
+    width:80%;
+    max-width:600px;
+    border:2px solid #c8efd7;
+    background:var(--input);
+    border-radius:12px;
+    padding:12px 16px;
+    font-size:16px;
+    outline:none;
+    transition:box-shadow .2s;
+  }
+  input:focus {box-shadow:0 0 15px rgba(0,200,120,0.2);}
+  .flowers {
+    display:flex; justify-content:center; gap:6px; margin-top:8px;
+    font-size:22px;
+  }
+  .btn {
+    background:linear-gradient(90deg,#ff90c1,#caa6ff);
+    color:white;
+    border:none;
+    padding:12px 24px;
+    border-radius:12px;
+    font-weight:700;
+    cursor:pointer;
+    margin-top:16px;
+    transition:transform .15s;
+  }
+  .btn:hover {transform:scale(1.05);}
+  .progress {margin-top:6px;font-size:14px;color:#6e3a76;}
+
+  .final {
+    margin-top:20px;
+    background:linear-gradient(180deg,#fff6fb,#fff9ff);
+    border-radius:16px;
+    padding:20px;
+  }
+  .signature {margin-top:14px;font-weight:600;color:#63306b;font-size:18px;}
+  .confetti {
+    position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;
+    overflow:hidden;z-index:10;
+  }
+  .confetti span {
+    position:absolute;width:8px;height:14px;opacity:0.8;
+    animation:fall linear infinite;
+  }
+  @keyframes fall {
+    0%{transform:translateY(0) rotate(0);}
+    100%{transform:translateY(100vh) rotate(720deg);}
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="balloon b1"></div>
+    <div class="balloon b2"></div>
+    <div class="balloon b3"></div>
+    <div class="balloon b4"></div>
+    <h1>Happy Birthday Akshara!</h1>
+    <div class="subtitle">Let’s make your day a little brighter 🌸</div>
+
+    <div id="slides">
+      <!-- slides inserted by JS -->
+    </div>
+
+    <button class="btn" id="nextBtn">Next →</button>
+    <div class="progress" id="progress">Question 1 of 7</div>
+  </div>
+
+  <div class="confetti" id="confetti"></div>
+
+<script>
+const questions = [
+  "1️⃣ How old are we pretending you are today? 😜",
+  "2️⃣ How much cake have you stolen so far? 🍰",
+  "3️⃣ Who makes you laugh the most right now? 😂",
+  "4️⃣ What’s something small that makes you smile? 🌸",
+  "5️⃣ How excited are you for the surprises ahead? 🎁",
+  "6️⃣ If you could make one wish come true, what would it be? 💫",
+  "7️⃣ Any sweet message for your future self? 💖"
+];
+
+const slidesEl = document.getElementById("slides");
+questions.forEach((q,i)=>{
+  const div=document.createElement("div");
+  div.className="slide";
+  div.innerHTML=`
+    <div class="question">${q}</div>
+    <input type="text" id="ans${i}" placeholder="Type your answer here...">
+    <div class="flowers">🌸🌼🌺🌼🌸</div>
+  `;
+  slidesEl.appendChild(div);
+});
+const final=document.createElement("div");
+final.className="slide";
+final.innerHTML=`
+  <div class="final">
+    <h2>Surprise & Lots of Love 🎉</h2>
+    <p>Dear Akshara,<br>
+    May your days bloom like these flowers and your dreams grow brighter each day.<br>
+    May laughter follow you everywhere you go and kindness never leave your side.<br>
+    Keep shining, smiling, and chasing what makes you happy.<br>
+    You deserve a life as colorful as today! 🌸🌈</p>
+    <div class="signature">With all my love,<br>Your Friend 💫</div>
+  </div>`;
+slidesEl.appendChild(final);
+
+const slides=document.querySelectorAll(".slide");
+let current=0; slides[current].classList.add("active");
+const nextBtn=document.getElementById("nextBtn");
+const progress=document.getElementById("progress");
+
+nextBtn.addEventListener("click",()=>{
+  slides[current].classList.remove("active");
+  current++;
+  if(current<slides.length){
+    slides[current].classList.add("active");
+    progress.textContent=current<questions.length?`Question ${current+1} of ${questions.length}`:"All done 🎉";
+    if(current===slides.length-1){nextBtn.style.display="none";}
+    spawnConfetti();
+  }
+});
+
+// simple confetti
+function spawnConfetti(){
+  const c=document.getElementById("confetti");
+  for(let i=0;i<25;i++){
+    const s=document.createElement("span");
+    s.style.left=Math.random()*100+"%";
+    s.style.top="-10px";
+    s.style.background=["#ffb6c1","#ffa07a","#dda0dd","#98fb98","#add8e6"][Math.floor(Math.random()*5)];
+    s.style.animationDuration=3+Math.random()*4+"s";
+    c.appendChild(s);
+    setTimeout(()=>s.remove(),7000);
+  }
+}
+</script>
+</body>
+</html>
